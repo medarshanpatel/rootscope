@@ -1,0 +1,61 @@
+<!doctype html>
+<html ng-app="app">
+
+<head>
+    <link href="assets/css/styles.css" rel="stylesheet" type="text/css"> </link>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"> </link>
+    <script src="assets/js/jquery-1.11.1.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/angular.min.js"></script>
+    <script src="assets/js/angular-ui-router.min.js"></script>
+    <script src="assets/js/angular-messages.js"></script>
+    <script src="assets/js/angular-cookies.min.js"></script>
+</head>
+
+<body ng-cloak>
+    <div ng-controller="RootscopeController as rootscopeVm" class="ng-scope">
+        <button ng-click="rootscopeVm.printData()" class="btn btn-danger">Click Me  </button>
+        <p>Result = {{ rootscopeVm.data }}</p>
+    </div>
+    <hr> 
+
+    <p>$broadcast - Parent</p>
+    <div ng-controller="RootscopeController as rootscopeVm" class="ng-scope">
+        <button ng-click="rootscopeVm.scopeFunction()" class="btn btn-danger">Click Me  </button>
+        <div ng-controller="SiblingOneController as siblingOneVm" class="ng-scope"></div>
+    </div>
+    <hr> 
+
+    <p>$emit -- Sibling</p>
+    <div ng-controller="RootscopeController as rootscopeVm" class="ng-scope">
+        <div ng-controller="SiblingOneController as siblingOneVm" class="ng-scope">
+            <button ng-click="siblingOneVm.scopeFunction()" class="btn btn-danger">Click Me  </button>
+        </div>
+    </div>
+    <hr> 
+
+    <p>$rootScope.($emit/$broadcast) </p>
+    <div ng-controller="RootscopeController as rootscopeVm" class="ng-scope">
+        <div ng-controller="SiblingOneController as siblingOneVm" class="ng-scope"></div>
+        <div ng-controller="SiblingTwoController as siblingTwoVm" class="ng-scope">
+            <div ng-controller="ChildController as childVm" class="ng-scope">
+                <button ng-click="childVm.scopeFunction()" class="btn btn-danger">Click Me  </button>
+            </div>
+        </div>
+    </div>  
+    <hr> 
+
+    <div ng-controller="RootscopeController as rootscopeVm" class="ng-scope">
+    Race - <button ng-click="rootscopeVm.raceFunction()" class="btn btn-danger">Race</button><br/>
+    All - <button ng-click="rootscopeVm.allFunction()" class="btn btn-danger">All</button>
+    </div>
+   
+    <script src="app.module.js"></script>
+    <script src="app.controller.js"></script>
+    <script src="siblingone/siblingone.controller.js"></script>
+    <script src="siblingtwo/siblingtwo.controller.js"></script>
+    <script src="child/child.controller.js"></script>
+
+</body>
+
+</html>
